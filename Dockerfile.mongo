@@ -53,5 +53,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
+COPY db/* /data/db/
+
 EXPOSE 27017
 CMD ["mongod"]
