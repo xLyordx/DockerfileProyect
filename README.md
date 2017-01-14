@@ -7,4 +7,5 @@ docker run --name "nombre del contenedor" -h "host del contenedor" -d -p mapeo d
 se ejecuta
 docker exec nombredelcontenedor mongod y cerrar la terminal
 
+pendiente actualizar db
 
