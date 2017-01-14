@@ -1,4 +1,4 @@
-FROM debian
+FROM openjdk:8-jre
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
