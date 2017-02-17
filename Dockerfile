@@ -10,9 +10,12 @@ ENV TOMCAT_NATIVE_LIBDIR $CATALINA_HOME/native-jni-lib
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$TOMCAT_NATIVE_LIBDIR
 
 # runtime dependencies for Tomcat Native Libraries
-# Tomcat Native 1.2+ requires a newer version of OpenSSL than debian:jessie has available (1.0.2g+)
+# Tomcat Native 1.2+ requires a newer version of OpenSSL than debian:jessie has available
+# > checking OpenSSL library version >= 1.0.2...
+# > configure: error: Your version of OpenSSL is not compatible with this version of tcnative
 # see http://tomcat.10.x6.nabble.com/VOTE-Release-Apache-Tomcat-8-0-32-tp5046007p5046024.html (and following discussion)
-ENV OPENSSL_VERSION 1.1.0c-2
+# and https://github.com/docker-library/tomcat/pull/31
+ENV OPENSSL_VERSION 1.1.0d-2
 RUN { \
 		echo 'deb http://deb.debian.org/debian stretch main'; \
 	} > /etc/apt/sources.list.d/stretch.list \
@@ -41,7 +44,7 @@ RUN set -ex; \
 	done
 
 ENV TOMCAT_MAJOR 8
-ENV TOMCAT_VERSION 8.0.39
+ENV TOMCAT_VERSION 8.0.41
 
 # https://issues.apache.org/jira/browse/INFRA-8753?focusedCommentId=14735394#comment-14735394
 ENV TOMCAT_TGZ_URL https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
@@ -180,12 +183,12 @@ RUN { \
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
-ENV JAVA_VERSION 8u111
-ENV JAVA_DEBIAN_VERSION 8u111-b14-2~bpo8+1
+ENV JAVA_VERSION 8u121
+ENV JAVA_DEBIAN_VERSION 8u121-b13-1~bpo8+1
 
 # see https://bugs.debian.org/775775
 # and https://github.com/docker-library/java/issues/19#issuecomment-70546872
-ENV CA_CERTIFICATES_JAVA_VERSION 20140324
+ENV CA_CERTIFICATES_JAVA_VERSION 20161107~bpo8+1
 
 RUN set -x \
 	&& apt-get update \
