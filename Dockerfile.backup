@@ -15,7 +15,7 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$TOMCAT_NATIVE_LIBDIR
 # > configure: error: Your version of OpenSSL is not compatible with this version of tcnative
 # see http://tomcat.10.x6.nabble.com/VOTE-Release-Apache-Tomcat-8-0-32-tp5046007p5046024.html (and following discussion)
 # and https://github.com/docker-library/tomcat/pull/31
-ENV OPENSSL_VERSION 1.1.0e-1
+ENV OPENSSL_VERSION 1.1.0d-2
 RUN { \
 		echo 'deb http://deb.debian.org/debian stretch main'; \
 	} > /etc/apt/sources.list.d/stretch.list \
@@ -97,7 +97,7 @@ RUN set -e \
 	fi
 
 
-#actualizacion de cloudBRT.war
+# instalacion de cloudBRT.war
 
 COPY cloudBRT.war /usr/local/tomcat/webapps/
 
@@ -158,7 +158,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 COPY db/* /data/db/
 
-#instalacion de java
+#instalacion de Java8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		bzip2 \
@@ -201,8 +201,7 @@ RUN set -x \
 # see CA_CERTIFICATES_JAVA_VERSION notes above
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-# If you're reading this and have any feedback on how this image could be
-#   improved, please open an issue or a pull request so we can discuss it!
+
 
 EXPOSE 27017
 EXPOSE 8080
